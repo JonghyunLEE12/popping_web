@@ -11,16 +11,23 @@ function BridgePage({type,id,utmInfo,deepLinkKey}) {
  
 
   useEffect(() => {
-
-
-    
+    handlePageLoad();
   }, []);
 
   useEffect(() => {
-  
+    handlePageLoad();
   }, [router]);
 
 
+  const handlePageLoad = async() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const externalUrl = 'https://popping-web.vercel.app';
+    const appScheme = `popping://`;
+
+    setTimeout(() => {
+      window.location.href = appScheme;
+    });
+  };
   
 
   return (
@@ -32,7 +39,7 @@ function BridgePage({type,id,utmInfo,deepLinkKey}) {
           </div>
         </div>
         <div id="moveToApp">
-          <button className="appViewButton" id="appViewButton">앱으로 보기</button>
+          <button className="appViewButton" id="appViewButton" onClick={() => { window.location.href = "popping://";}}>앱으로 보기</button>
         </div>
       </div>
     </>
