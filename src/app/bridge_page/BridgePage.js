@@ -22,11 +22,11 @@ function BridgePage({type,id,utmInfo,deepLinkKey}) {
   const handlePageLoad = async() => {
     const userAgent = navigator.userAgent.toLowerCase();
     const externalUrl = 'https://popping-web.vercel.app';
-    const appScheme = `popping://`;
+    const appScheme = `popping.popping://`;
 
     setTimeout(() => {
       window.location.href = appScheme;
-    });
+    },2000);
   };
   
 
@@ -39,7 +39,7 @@ function BridgePage({type,id,utmInfo,deepLinkKey}) {
           </div>
         </div>
         <div id="moveToApp">
-          <button className="appViewButton" id="appViewButton" onClick={() => { window.location.href = "popping://";}}>앱으로 보기</button>
+          <button className="appViewButton" id="appViewButton" onClick={() => { window.location.href = "popping.popping://";}}>앱으로 보기</button>
         </div>
       </div>
     </>
