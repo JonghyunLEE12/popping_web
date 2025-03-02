@@ -9,9 +9,7 @@ export async function generateMetadata({ searchParams }) {
   const key = searchParams.key;
   const keyValue = await bridgeProvider.getMetaDataByKey(key);
 
-  console.log("THIS IS KEY VALUE >>>>>");
-  console.log(keyValue.name);
-  console.log('###');
+
 
   return makeMetadata(
     `${keyValue.name} 님이 팝핑 친구 요청을 보냈어요!`,
@@ -21,9 +19,16 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export default async function Home({ searchParams }) {
+  const key = searchParams.key;
+  const keyValue = await bridgeProvider.getMetaDataByKey(key);
+
+  console.log("THIS IS KEY VALUE ON VIEW >>>>>");
+  console.log(keyValue);
+ 
+  console.log('###');
   return (
     <div id="Home">
-      <BridgePage />
+      <BridgePage keyValue={keyValue}/>
     </div>
   );
 }

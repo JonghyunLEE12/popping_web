@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 
 
 
-function BridgePage({type,id,utmInfo,deepLinkKey}) {
-  const [showModal, setShowModal] = useState(false);
+function BridgePage({keyValue}) {
   const router = useRouter();
  
 
@@ -22,9 +21,26 @@ function BridgePage({type,id,utmInfo,deepLinkKey}) {
   const handlePageLoad = async() => {
     const userAgent = navigator.userAgent.toLowerCase();
     const externalUrl = 'https://popping-web.vercel.app';
-    const appScheme = `popping.popping://`;
+    // const appScheme = `popping.popping://`;
+
+    const { name, platform, profileUrl, userId } = keyValue;
+    
+    // URLSearchParams를 사용하여 각 프로퍼티를 쿼리 파라미터로 추가
+    const queryParams = new URLSearchParams({
+      name: name || "",
+      platform: platform || "",
+      profileUrl: profileUrl || "",
+      userId: userId ? userId.toString() : "",
+    });
+
+    // const appScheme = `popping.popping://?key=${encodeURIComponent(keyValue)}`;
+    const appScheme = `popping.popping://?${queryParams.toString()}`;
+    console.log("Redirecting to:", appScheme);
+    
 
     setTimeout(() => {
+      console.log("THIS IS APP SCHEME");
+      console.log(appScheme);
       window.location.href = appScheme;
     },2000);
   };
@@ -39,7 +55,20 @@ function BridgePage({type,id,utmInfo,deepLinkKey}) {
           </div>
         </div>
         <div id="moveToApp">
-          <button className="appViewButton" id="appViewButton" onClick={() => { window.location.href = "popping.popping://";}}>앱으로 보기</button>
+          <button className="appViewButton" id="appViewButton" 
+          onClick={() => {
+            const { name, platform, profileUrl, userId } = keyValue;
+
+            const queryParams = new URLSearchParams({
+              name: name || "",
+              platform: platform || "",
+              profileUrl: profileUrl || "",
+              userId: userId ? userId.toString() : "",
+            });
+            const appScheme = `popping.popping://?${queryParams.toString()}`;
+            console.log("Redirecting to:", appScheme);
+            window.location.href = appScheme;
+         }}>앱으로 보기</button>
         </div>
       </div>
     </>
